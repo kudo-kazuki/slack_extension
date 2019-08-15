@@ -5,6 +5,7 @@
 // @author       kudo
 // @match        https://*.slack.com/*
 // @require https://code.jquery.com/jquery-3.4.1.min.js
+// @updateURL    https://raw.githubusercontent.com/kudo-kazuki/slack_extension/master/slack_chat_new.js
 // ==/UserScript==
 
 (function() {
