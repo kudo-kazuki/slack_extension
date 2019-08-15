@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         slack
 // @namespace    kudo
-// @version      0.2
+// @version      0.3
 // @author       kudo
 // @match        https://*.slack.com/*
 // @require https://code.jquery.com/jquery-3.4.1.min.js
