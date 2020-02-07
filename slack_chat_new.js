@@ -17,8 +17,7 @@
             return;
         }
 
-        var $c_message = $root.children('.c-message');
-        var $c_message_actions__container = $c_message.children('.c-message_actions__container');
+        var $c_message_actions__container = $root.find('.c-message_actions__container');
 
         if(!$c_message_actions__container.length){
             return;
@@ -47,7 +46,8 @@
                     aria-label="返信する" 
                     aria-haspopup="true" 
                     data-qa="" 
-                    delay="60"
+                    delay="60" 
+                    style="width:30px;"
                 >
                     <i class="c-icon c-icon--angle-arrow-up-left-alt" type="small-reaction" aria-hidden="true"></i>
                 </button>
@@ -153,7 +153,7 @@
                     $post_btn.trigger('click');
                     $ql_editor.html('<p><br></p>')
                 }, 30);
-            }, 600);
+            }, 700);
         });
     });
 
