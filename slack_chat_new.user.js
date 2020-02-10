@@ -362,6 +362,22 @@
 
 
 
+	/*CyberAgent がこのチャンネルに参加していますを殺す*/
+	setInterval(function(){
+		var $contextBarText = $('#context-bar-text');
+
+		if(!$contextBarText.length){
+			return false;
+		}
+
+		if($contextBarText.text().match('がこのチャンネルに参加しています')){
+			$contextBarText.closest('.p-context_bar').fadeOut(200, function(){
+				$contextBarText.closest('.p-context_bar').remove();
+			});
+		}
+	}, 500);
+
+
    /*
 <span 
     class="c-mrkdwn__broadcast c-mrkdwn__broadcast--link c-mrkdwn__broadcast--mention" 
