@@ -180,7 +180,7 @@
                 }
 
                 if(count > 30000 && !$p_workspace__secondary_view.length){
-                    alert('たぶん何か調子悪い。');
+                    console.log('たぶん何か調子悪い。');
                     clearInterval(findSecondary_viewInterval);
                     count = 0;
                     reject('たぶん何か調子悪い。');
@@ -268,7 +268,7 @@
                 }
 
                 if(count > 30000 && !$p_classic_nav__model__buttons.length){
-                    alert('たぶん何か調子悪い。');
+                    console.log('たぶん何か調子悪い。');
                     clearInterval(findClassicNavBtnInterval);
                     count = 0;
                     reject('たぶん何か調子悪い。');
