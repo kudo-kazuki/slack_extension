@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         slack
 // @namespace    kudo
-// @version      0.4
+// @version      0.5
 // @author       kudo
 // @match        https://*.slack.com/*
 // @require https://code.jquery.com/jquery-3.4.1.min.js
@@ -112,6 +112,10 @@
         e.preventDefault();
 
         var $ql_editor = $('.workspace__primary_view_footer').find('.ql-editor');
+        if(!$ql_editor.length){
+            console.log("$('.workspace__primary_view_footer').find('.ql-editor')が存在してない。");
+        }
+
         var $message = $ql_editor.html();
 
         if($message == '<p><br></p>'){
@@ -121,18 +125,41 @@
 
         var $this = $(this);
         var $root = $this.closest('.c-virtual_list__item');
+        if(!$root.length){
+            console.log("closest('.c-virtual_list__item')が存在してない。");
+        }
+
         var $c_message__body = $root.find('.c-message__body');
+        if(!$c_message__body.length){
+            console.log("$root.find('.c-message__body')が存在してない。");
+        }
+
         var $start_thread_btn = $this.parent().children('button[data-qa="start_thread"]');
+        if(!$start_thread_btn.length){
+            console.log("$this.parent().children('button[data-qa=start_thread]')が存在してない。");
+        }
+
         var $c_message__sender = $root.find('.c-message__sender');
+        if(!$c_message__sender.length){
+            console.log("$root.find('.c-message__sender')が存在してない。");
+        }
+
         var $c_message__sender_link = $c_message__sender.find('a');
+        if(!$c_message__sender_link.length){
+            console.log("$c_message__sender.find('a')が存在してない。");
+        }
+
         var reply_user = {
             name: $c_message__sender_link.text(),
             id: $c_message__sender_link.attr('data-message-sender')
         };
         var reply_mention_html = `<ts-mention data-id="${reply_user.id}" data-label="@${reply_user.name}" 
         spellcheck="false" class="c-member_slug c-member_slug--link ts_tip_texty" dir="ltr">Re: @${reply_user.name}</ts-mention>`;
+        console.log('reply_user：', reply_user);
+        console.log('reply_mention_html：', reply_mention_html);
 
         $message = reply_mention_html + $message;
+        console.log('$message：' + $message);
 
         $start_thread_btn.trigger('click');/*スレッド開始ボタンクリック*/
 
@@ -162,9 +189,24 @@
             var count = 0;
             var findSecondary_viewInterval = setInterval(function(){
                 var $p_workspace__secondary_view = $('.p-workspace__secondary_view');
+                if(!$p_workspace__secondary_view.length){
+                    console.log(".p-workspace__secondary_viewが存在してない。");
+                }
+
                 var $secondary_ql_editor = $p_workspace__secondary_view.find('.ql-editor');
+                if(!$secondary_ql_editor.length){
+                    console.log("$p_workspace__secondary_view.find('.ql-editor')が存在してない。");
+                }
+
                 var $ikanimo_toukou_suru_label = $p_workspace__secondary_view.find('.c-label.p-threads_footer__broadcast_label');
-                var $post_btn = $p_workspace__secondary_view.find('.p-threads_footer__send_button.p-message_input__send');
+                if(!$ikanimo_toukou_suru_label.length){
+                    console.log("$p_workspace__secondary_view.find('.c-label.p-threads_footer__broadcast_label')が存在してない。");
+                }
+
+                var $post_btn = $p_workspace__secondary_view.find('button[data-qa="texty_send_button"]');
+                if(!$post_btn.length){
+                    console.log("button[data-qa=texty_send_button]が存在してない。");
+                }
 
                 if($p_workspace__secondary_view.length && $secondary_ql_editor.length && $ikanimo_toukou_suru_label.length && $post_btn.length){
                     clearInterval(findSecondary_viewInterval);
@@ -179,7 +221,7 @@
                     resolve($secondary_view_elm);
                 }
 
-                if(count > 30000 && !$p_workspace__secondary_view.length){
+                if(count > 7000 && !$p_workspace__secondary_view.length){
                     console.log('たぶん何か調子悪い。');
                     clearInterval(findSecondary_viewInterval);
                     count = 0;
